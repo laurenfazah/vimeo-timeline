@@ -8,8 +8,7 @@ body {
     position: absolute;
     left: 0px;
     right: 0px;
-    /*top: 50%;*/
-    bottom: 50%;
+    bottom: 10%;
     z-index: 999;
     color: white;
     pointer-events: none;
@@ -21,7 +20,7 @@ body {
 }
 
 .timeline{
-    height: 100px;
+    height: 10%;
 }
 
 .timeline button {
