@@ -8,7 +8,7 @@ body {
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 50%;
+    /*top: 50%;*/
     bottom: 50%;
     z-index: 999;
     color: white;
