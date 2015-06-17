@@ -78,3 +78,38 @@ $(function() {
     }
 
 });
+
+$("button").click(function(){
+    var buttonClass = $(this).attr("class");
+    switch(buttonClass) {
+        case "yr2007":
+            obj.pastDate = obj.currentYear - 2007;
+            compiledDate = obj.olympicDate + obj.pastDate;
+            olympics = new Date(compiledDate, 8-1, 10);
+            $('#countdown-banner').countdown('destroy');
+            $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
+            break;
+        case "yr2010":
+            obj.pastDate = obj.currentYear - 2010;
+            compiledDate = obj.olympicDate + obj.pastDate;
+            olympics = new Date(compiledDate, 8-1, 10);
+            $('#countdown-banner').countdown('destroy');
+            $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
+            break;
+        case "yr2013":
+            obj.pastDate = obj.currentYear - 2013;
+            compiledDate = obj.olympicDate + obj.pastDate;
+            olympics = new Date(compiledDate, 8-1, 10);
+            $('#countdown-banner').countdown('destroy');
+            $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
+            break;
+        case "yr2015":
+            obj.pastDate = obj.currentYear - 2015;
+            compiledDate = obj.olympicDate + obj.pastDate;
+            olympics = new Date(compiledDate, 8-1, 10);
+            $('#countdown-banner').countdown('destroy');
+            $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
+            break;
+    }
+});
+
