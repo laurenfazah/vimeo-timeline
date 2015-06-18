@@ -41,39 +41,21 @@ $(function() {
     $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
 
     var iframe = $('#player1')[0],
-        player = $f(iframe),
-        status = $('.status');
+        player = $f(iframe);
 
     // When the player is ready, add listeners for pause, finish, and playProgress
     player.addEvent('ready', function() {
-        status.text('ready');
-        player.addEvent('pause', onPause);
         player.addEvent('finish', onFinish);
-        player.addEvent('playProgress', onPlayProgress);
         player.addEvent('playProgress', changeYear);
         player.addEvent('seekTo', jumpTo);
     });
 
-    // Call the API when a button is pressed
-    $('button').bind('click', function() {
-        player.api($(this).text().toLowerCase());
-    });
-
-    function onPause(id) {
-        status.text('paused');
-    }
-
     function onFinish(id) {
-        status.text('done-zo');
+        // will toggle next video
     }
 
-    function onPlayProgress(data, id) {
-        status.text(data.seconds + 's played');
-    }
-
-    // may need to tweak namespace
-    function jumpTo(seconds:number) {
-        player.api(seekTo(seconds:number));
+    function jumpTo(seconds) {
+        player.api(seekTo(seconds));
     }
 
     function changeYear (data, id) {
@@ -118,6 +100,6 @@ $(function() {
         }
 
         resetCountdown(activeDate.year);
-        seekTo(activeDate.startTime); //start at beginning of year's frame
+        jumpTo(activeDate.startTime); //start at beginning of year's frame
     });
 });
