@@ -28,6 +28,8 @@ var obj = {
         endTime:15
     },
 
+    activeDate,
+
     resetCountdown = function(year) {
         obj.pastDate = obj.currentYear - year;
         compiledDate = obj.olympicDate + obj.pastDate;
@@ -47,7 +49,7 @@ $(function() {
     player.addEvent('ready', function() {
         player.addEvent('finish', onFinish);
         player.addEvent('playProgress', changeYear);
-        player.addEvent('seekTo', jumpTo);
+        player.addEvent('seek', jumpTo);
     });
 
     function onFinish(id) {
@@ -55,12 +57,10 @@ $(function() {
     }
 
     function jumpTo(seconds) {
-        player.api(seekTo(seconds));
+        player.api('seek', seconds);
     }
 
     function changeYear (data, id) {
-        var activeDate = {};
-
         if (data.seconds < date1.endTime) {
             activeDate = date1;
         };
@@ -87,15 +87,19 @@ $(function() {
         switch(buttonClass) {
             case "yr2007":
                 activeDate = date1;
+                // jumpTo(activeDate.startTime);
                 break;
             case "yr2010":
                 activeDate = date2;
+                // jumpTo(activeDate.startTime);
                 break;
             case "yr2013":
                 activeDate = date3;
+                // jumpTo(activeDate.startTime);
                 break;
             case "yr2015":
                 activeDate = date4;
+                // jumpTo(activeDate.startTime);
                 break;
         }
 
