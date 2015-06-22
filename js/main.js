@@ -5,27 +5,28 @@ var obj = {
     },
 
     compiledDate = obj.olympicDate + obj.pastDate,
+    // arbitrarily set olympics to july 1st 2024 (countdown requires month+1)
     olympics = new Date(compiledDate, 8-1, 10),
 
     date1 = {
         year:2007,
-        startTime:0,
-        endTime:3
+        startTime:0.01,
+        endTime:50
     },
     date2 = {
         year:2010,
-        startTime:6,
-        endTime:7
+        startTime:50.01,
+        endTime:80
     },
     date3 = {
         year:2013,
-        startTime:10,
-        endTime:11
+        startTime:80.01,
+        endTime:140
     },
     date4 = {
         year:2015,
-        startTime:14,
-        endTime:15
+        startTime:230.01,
+        endTime:236.544
     },
 
     activeDate,
@@ -39,25 +40,24 @@ var obj = {
     };
 
 $(function() {
-    // may need to move back to its own anon function
-    $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
+    // $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
 
     var iframe = $('#player1')[0],
         player = $f(iframe);
 
-    // When the player is ready, add listeners for pause, finish, and playProgress
+    // when the player is ready, add listeners
     player.addEvent('ready', function() {
         player.addEvent('finish', onFinish);
         player.addEvent('playProgress', changeYear);
-        player.addEvent('seek', jumpTo);
     });
 
     function onFinish(id) {
-        // will toggle next video
+        $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
     }
 
-    function jumpTo(seconds) {
-        player.api('seek', seconds);
+    // jumps to appropriate time on video for timeline
+    function jumpTo(time) {
+        player.api('seekTo', time);
     }
 
     function changeYear (data, id) {
@@ -77,33 +77,29 @@ $(function() {
             activeDate = date4;
         };
 
-        resetCountdown(activeDate.year);
+        if (activeDate !== undefined){
+            resetCountdown(activeDate.year);
+        }
     }
 
     $("button").click(function(){
-        var buttonClass = $(this).attr("class"),
-            activeDate = {};
+        var buttonClass = $(this).attr("class");
 
         switch(buttonClass) {
             case "yr2007":
                 activeDate = date1;
-                // jumpTo(activeDate.startTime);
                 break;
             case "yr2010":
                 activeDate = date2;
-                // jumpTo(activeDate.startTime);
                 break;
             case "yr2013":
                 activeDate = date3;
-                // jumpTo(activeDate.startTime);
                 break;
             case "yr2015":
                 activeDate = date4;
-                // jumpTo(activeDate.startTime);
                 break;
         }
 
-        resetCountdown(activeDate.year);
-        jumpTo(activeDate.startTime); //start at beginning of year's frame
+        jumpTo(activeDate.startTime);
     });
 });
