@@ -15,17 +15,89 @@
 
         <div class="container">
             <!-- countdown -->
-            <div id="countdown-banner"></div>
+            <div id="countdown-banner">
+            </div>
 
             <!-- video embed -->
-            <iframe class="vimeo" id="player1" src="https://player.vimeo.com/video/130797908?api=1&player_id=player1" width="100%" height="90%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>
+            <div class="video">
+                <iframe class="vimeo" id="player1" src="https://player.vimeo.com/video/130797908?api=1&player_id=player1" width="100%" height="90%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            </div>
 
-        <div class="timeline">
-            <button class="yr2007">2007</button>
-            <button class="yr2010">2010</button>
-            <button class="yr2013">2013</button>
-            <button class="yr2015">2015</button>
+            <!-- images -->
+            <div>
+                <!-- background image -->
+                <img src="assets/img.jpg" class="lg-img" id="img">
+                <!-- replay button -->
+                <button class="interactive-img" id="replay">
+                    <img src="assets/curvearrow6.svg" alt="">
+                </button>
+
+                <!-- pop up cards -->
+                <a href="#">
+                    <div class="pop-up 1">
+                        <p>Did you know?</p>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="pop-up 2">
+                        <p>Cory and Eric meet for the first time.</p>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="pop-up 3">
+                        <p>Did you know?</p>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="pop-up 4">
+                        <p>Did you know?</p>
+                    </div>
+                </a>
+
+                <!-- overlay -->
+                <div class="overlay">
+                    <!-- <p>X</p> -->
+                </div>
+
+                <div class="info-card 1">
+                    <p>Demo info 1</p>
+                </div>
+                <div class="info-card 2">
+                    <p>Demo info 2</p>
+                </div>
+                <div class="info-card 3">
+                    <p>Demo info 3</p>
+                </div>
+                <div class="info-card 4">
+                    <p>Demo info 4</p>
+                </div>
+
+                <!-- interactive images -->
+                <a href="http://google.com" target="_blank">
+                    <img src="assets/coffeepot5.svg" class="interactive-img" id="img1">
+                </a>
+                <a href="http://google.com" target="_blank">
+                    <img src="assets/furniture46.svg" class="interactive-img" id="img2">
+                </a>
+                <a href="http://google.com" target="_blank">
+                    <img src="assets/hotdrink27.svg" class="interactive-img" id="img3">
+                </a>
+                <a href="http://google.com" target="_blank">
+                    <img src="assets/storage64.svg" class="interactive-img" id="img4">
+                </a>
+                <a href="http://google.com" target="_blank">
+                    <img src="assets/trashcan13.svg" class="interactive-img" id="img5">
+                </a>
+            </div>
+
+            <!-- timeline -->
+            <div class="timeline">
+                <button class="year-button" id="yr2007">1</button>
+                <button class="year-button" id="yr2010">2</button>
+                <button class="year-button" id="yr2013">3</button>
+                <button class="year-button" id="yr2015">4</button>
+            </div>
+
         </div>
 
 

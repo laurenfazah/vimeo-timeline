@@ -9,27 +9,37 @@ var obj = {
     olympics = new Date(compiledDate, 8-1, 10),
 
     date1 = {
+        number:1,
         year:2007,
         startTime:0.01,
-        endTime:50
+        endTime:10
     },
     date2 = {
+        number:2,
         year:2010,
         startTime:50.01,
-        endTime:80
+        endTime:60
     },
     date3 = {
+        number:3,
         year:2013,
         startTime:80.01,
-        endTime:140
+        endTime:90
     },
     date4 = {
+        number:4,
         year:2015,
-        startTime:230.01,
+        startTime:236.543,
         endTime:236.544
     },
 
     activeDate,
+
+    cardNum,
+
+    cardSelector,
+
+    overlaySelector,
 
     resetCountdown = function(year) {
         obj.pastDate = obj.currentYear - year;
@@ -48,11 +58,13 @@ $(function() {
     // when the player is ready, add listeners
     player.addEvent('ready', function() {
         player.addEvent('finish', onFinish);
-        player.addEvent('playProgress', changeYear);
+        player.addEvent('playProgress', frameListen);
     });
 
     function onFinish(id) {
-        $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
+        // $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
+        $('#img').css("display","block");
+        $('.interactive-img').css("display","block");
     }
 
     // jumps to appropriate time on video for timeline
@@ -60,32 +72,49 @@ $(function() {
         player.api('seekTo', time);
     }
 
-    function changeYear (data, id) {
-        if (data.seconds < date1.endTime) {
-            activeDate = date1;
-        };
+    function frameListen (data, id) {
+        if ((data.seconds < date1.endTime) ||
+            (data.seconds > date2.startTime && data.seconds < date2.endTime) ||
+            (data.seconds > date3.startTime && data.seconds < date3.endTime) ||
+            (data.seconds > date4.startTime && data.seconds < date4.endTime)) {
+            if (data.seconds < date1.endTime) {
+                activeDate = date1;
+                cardNum = 1;
+            };
 
-        if (data.seconds > date2.startTime && data.seconds < date2.endTime) {
-            activeDate = date2;
-        };
+            if (data.seconds > date2.startTime && data.seconds < date2.endTime) {
+                activeDate = date2;
+                cardNum = 2;
+            };
 
-        if (data.seconds > date3.startTime && data.seconds < date3.endTime) {
-            activeDate = date3;
-        };
+            if (data.seconds > date3.startTime && data.seconds < date3.endTime) {
+                activeDate = date3;
+                cardNum = 3;
+            };
 
-        if (data.seconds > date4.startTime && data.seconds < date4.endTime) {
-            activeDate = date4;
-        };
+            if (data.seconds > date4.startTime && data.seconds < date4.endTime) {
+                activeDate = date4;
+                cardNum = 4;
+            };
+        } else {
+            activeDate = undefined;
+        }
+
+        cardSelector = '.pop-up.' + cardNum;
+
+        overlaySelector = ".info-card." + cardNum;
 
         if (activeDate !== undefined){
-            resetCountdown(activeDate.year);
+            $(cardSelector).css("display","block");
+        } else {
+            $(cardSelector).css("display","none");
         }
     }
 
-    $("button").click(function(){
-        var buttonClass = $(this).attr("class");
+    $(".year-button").click(function(){
+        var buttonID = $(this).attr("id");
 
-        switch(buttonClass) {
+        switch(buttonID) {
             case "yr2007":
                 activeDate = date1;
                 break;
@@ -102,4 +131,30 @@ $(function() {
 
         jumpTo(activeDate.startTime);
     });
+
+    $("#replay").click(function(){
+        $('#img').css("display","none");
+        $('.interactive-img').css("display","none");
+        jumpTo(0.00);
+        player.api('play');
+    })
+
+    $('.pop-up').click(function(){
+        $('.overlay').css("display", "block");
+        $(overlaySelector).css("display", "block");
+        player.api('pause');
+        // show X
+    })
+
+    $('.overlay').click(function(){
+        $(this).css("display", 'none');
+        $('.info-card').css("display", "none");
+        player.api('play');
+    })
+
+    // on X click,
+            // $('.overlay').css("display","none");
+            // pop up hide
+            // play video
+
 });
