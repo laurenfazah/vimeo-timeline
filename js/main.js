@@ -106,6 +106,7 @@ $(function() {
         overlaySelector = ".info-card." + cardNum;
 
         if (activeDate !== undefined){
+            $('.pop-up').removeClass('active');
             $(cardSelector).addClass('active');
         } else {
             $('.pop-up').removeClass('active');
@@ -152,7 +153,7 @@ $(function() {
 
     // clicking out of informational overlay to resume video play
     $('.overlay').click(function(){
-        $(this).css("display", 'none');
+        $(this).css("display", "none");
         $(cardSelector).css('display', 'block');
         $('.info-card').css("display", "none");
         player.api('play');

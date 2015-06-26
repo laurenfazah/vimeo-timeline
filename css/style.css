@@ -46,7 +46,7 @@ div.pop-up{
     height: 250px;
     width: 300px;
     background: #fff;
-    opacity: .3;
+    opacity: .6;
     /*border: 4px solid black;*/
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
