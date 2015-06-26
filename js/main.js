@@ -17,14 +17,14 @@ var obj = {
     date2 = {
         number:2,
         year:2010,
-        startTime:50.01,
-        endTime:60
+        startTime:100.01,
+        endTime:110
     },
     date3 = {
         number:3,
         year:2013,
-        startTime:80.01,
-        endTime:90
+        startTime:180.01,
+        endTime:190
     },
     date4 = {
         number:4,
@@ -64,6 +64,7 @@ $(function() {
     function onFinish(id) {
         // $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
         $('#img').css("display","block");
+        $('#replay').css("display","block");
         $('.interactive-img').css("display","block");
     }
 
@@ -105,12 +106,13 @@ $(function() {
         overlaySelector = ".info-card." + cardNum;
 
         if (activeDate !== undefined){
-            $(cardSelector).css("display","block");
+            $(cardSelector).addClass('active');
         } else {
-            $(cardSelector).css("display","none");
+            $('.pop-up').removeClass('active');
         }
     }
 
+    // helping with jumping around video
     $(".year-button").click(function(){
         var buttonID = $(this).attr("id");
 
@@ -128,10 +130,10 @@ $(function() {
                 activeDate = date4;
                 break;
         }
-
         jumpTo(activeDate.startTime);
     });
 
+    // replay button at end of video
     $("#replay").click(function(){
         $('#img').css("display","none");
         $('.interactive-img').css("display","none");
@@ -139,15 +141,19 @@ $(function() {
         player.api('play');
     })
 
+    // creates overlay once pop up is clicked on
     $('.pop-up').click(function(){
+        $(this).css('display', 'none');
         $('.overlay').css("display", "block");
         $(overlaySelector).css("display", "block");
         player.api('pause');
         // show X
     })
 
+    // clicking out of informational overlay to resume video play
     $('.overlay').click(function(){
         $(this).css("display", 'none');
+        $(cardSelector).css('display', 'block');
         $('.info-card').css("display", "none");
         player.api('play');
     })
