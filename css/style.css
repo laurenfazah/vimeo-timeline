@@ -63,7 +63,7 @@ div.pop-up.active{
     font-weight: 300;
 }
 
-.overlay{
+.pause-overlay, .end-overlay{
     height: 100%;
     width: 100%;
     background: #fff;
@@ -74,7 +74,6 @@ div.pop-up.active{
     left: 0px;
     top: 0px;
     display: none;
-    /*pointer-events: none;*/
 }
 
 .info-card{

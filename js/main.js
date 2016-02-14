@@ -63,9 +63,9 @@ $(function() {
 
     function onFinish(id) {
         // $('#countdown-banner').countdown({until: olympics, format: 'YOWDHMS'});
-        $('#img').css("display","block");
-        $('#replay').css("display","block");
-        $('.interactive-img').css("display","block");
+        $('#img').css('display','block');
+        $('#replay').css('display','block');
+        $('.interactive-img').css('display','block');
     }
 
     // jumps to appropriate time on video for timeline
@@ -103,10 +103,12 @@ $(function() {
 
         cardSelector = '.pop-up.' + cardNum;
 
-        overlaySelector = ".info-card." + cardNum;
+        overlaySelector = '.info-card.' + cardNum;
 
         if (activeDate !== undefined){
             $('.pop-up').removeClass('active');
+            $('.interactive-img').css('display', 'none');
+            $('#replay').css('display', 'none');
             $(cardSelector).addClass('active');
         } else {
             $('.pop-up').removeClass('active');
@@ -114,20 +116,20 @@ $(function() {
     }
 
     // helping with jumping around video
-    $(".year-button").click(function(){
-        var buttonID = $(this).attr("id");
+    $('.year-button').click(function(){
+        var buttonID = $(this).attr('id');
 
         switch(buttonID) {
-            case "yr2007":
+            case 'yr2007':
                 activeDate = date1;
                 break;
-            case "yr2010":
+            case 'yr2010':
                 activeDate = date2;
                 break;
-            case "yr2013":
+            case 'yr2013':
                 activeDate = date3;
                 break;
-            case "yr2015":
+            case 'yr2015':
                 activeDate = date4;
                 break;
         }
@@ -135,9 +137,10 @@ $(function() {
     });
 
     // replay button at end of video
-    $("#replay").click(function(){
-        $('#img').css("display","none");
-        $('.interactive-img').css("display","none");
+    $('#replay').click(function(){
+        $('#img').css('display','none');
+        $('.interactive-img').css('display','none');
+        $('.info-card').css('display','none');
         jumpTo(0.00);
         player.api('play');
     })
@@ -145,23 +148,33 @@ $(function() {
     // creates overlay once pop up is clicked on
     $('.pop-up').click(function(){
         $(this).css('display', 'none');
-        $('.overlay').css("display", "block");
-        $(overlaySelector).css("display", "block");
+        $('.pause-overlay').css('display', 'block');
+        $(overlaySelector).css('display', 'block');
         player.api('pause');
-        // show X
     })
 
     // clicking out of informational overlay to resume video play
-    $('.overlay').click(function(){
-        $(this).css("display", "none");
-        $(cardSelector).css('display', 'block');
-        $('.info-card').css("display", "none");
+    $('.pause-overlay').click(function(){
+        $(this).css('display', 'none');
+        // $(cardSelector).css('display', 'block');
+        $('.info-card').css('display', 'none');
         player.api('play');
     })
 
-    // on X click,
-            // $('.overlay').css("display","none");
-            // pop up hide
-            // play video
+    // end of video, corresponding overlay pops up
+    $('.interactive-img').click(function(){
+        var dataID = $(this).data('id');
+        var infoCard = ".info-card." + dataID;
+        $('.end-overlay').css('display', 'block');
+        $(infoCard).css('display', 'block');
+        $('.interactive-img').css('display', 'none');
+    })
+
+    // clicking out of overlay to provide end of video options
+    $('.end-overlay').click(function(){
+        $(this).css('display', 'none');
+        $('.interactive-img').css('display', 'block');
+        $('.info-card').css('display', 'none');
+    })
 
 });
